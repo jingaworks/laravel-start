@@ -1,19 +1,34 @@
 <?php
 
-use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Route;
+Route::post('/login', 'api\V1\Admin\LoginController@login');
 
-/*
-|--------------------------------------------------------------------------
-| API Routes
-|--------------------------------------------------------------------------
-|
-| Here is where you can register API routes for your application. These
-| routes are loaded by the RouteServiceProvider within a group which
-| is assigned the "api" middleware group. Enjoy building your API!
-|
-*/
+Route::group(['prefix' => 'v1', 'as' => 'api.', 'namespace' => 'Api\V1\Admin', 'middleware' => ['auth:api']], function () {
+    // Permissions
+    Route::apiResource('permissions', 'PermissionsApiController');
 
-Route::middleware('auth:api')->get('/user', function (Request $request) {
-    return $request->user();
+    // Roles
+    Route::apiResource('roles', 'RolesApiController');
+
+    // Users
+    Route::apiResource('users', 'UsersApiController');
+
+    // Atestats
+    Route::post('atestats/media', 'AtestatApiController@storeMedia')->name('atestats.storeMedia');
+    Route::apiResource('atestats', 'AtestatApiController');
+
+    // Regions
+    Route::apiResource('regions', 'RegionApiController', ['except' => ['store']]);
+
+    // Places
+    Route::apiResource('places', 'PlaceApiController', ['except' => ['store']]);
+
+    // Categories
+    Route::apiResource('categories', 'CategoryApiController');
+
+    // Subcategories
+    Route::apiResource('subcategories', 'SubcategoryApiController');
+
+    // Products
+    Route::post('products/media', 'ProductApiController@storeMedia')->name('products.storeMedia');
+    Route::apiResource('products', 'ProductApiController');
 });
