@@ -10,8 +10,8 @@ class CreateProductsTable extends Migration
     {
         Schema::create('products', function (Blueprint $table) {
             $table->increments('id');
-            $table->string('slug');
             $table->string('title');
+            $table->string('slug');
             $table->longText('description');
             $table->decimal('price_starts', 15, 2);
             $table->decimal('price_ends', 15, 2)->nullable();

@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Str;
 use \DateTimeInterface;
 
 class Subcategory extends Model
@@ -17,6 +18,7 @@ class Subcategory extends Model
 
     protected $fillable = [
         'name',
+        'slug',
         'category_id',
         'added_by_id',
         'approved',
@@ -31,14 +33,20 @@ class Subcategory extends Model
         return $date->format('Y-m-d H:i:s');
     }
 
-    public function subcategoryProducts()
+    public function setNameAttribute($value)
+    {
+        $this->attributes['name'] = Str::title(Str::lower($value));
+        $this->attributes['slug'] = Str::slug($value);
+    }
+
+    public function products()
     {
         return $this->hasMany(Product::class, 'subcategory_id', 'id');
     }
 
     public function category()
     {
-        return $this->belongsTo(Category::class, 'category_id');
+        return $this->belongsTo(Category::class, 'category_id')->select(['id', 'name', 'slug']);
     }
 
     public function added_by()

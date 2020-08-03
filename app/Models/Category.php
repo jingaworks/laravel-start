@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Str;
 use \DateTimeInterface;
 
 class Category extends Model
@@ -17,6 +18,7 @@ class Category extends Model
 
     protected $fillable = [
         'name',
+        'slug',
         'added_by_id',
         'approved',
         'approved_by_id',
@@ -30,9 +32,20 @@ class Category extends Model
         return $date->format('Y-m-d H:i:s');
     }
 
+    public function setNameAttribute($value)
+    {
+        $this->attributes['name'] = Str::title(Str::lower($value));
+        $this->attributes['slug'] = Str::slug($value);
+    }
+
     public function categoryProducts()
     {
         return $this->hasMany(Product::class, 'category_id', 'id');
+    }
+
+    public function subcategories()
+    {
+        return $this->hasMany(Subcategory::class, 'category_id', 'id');
     }
 
     public function added_by()

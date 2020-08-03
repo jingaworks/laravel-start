@@ -52,17 +52,17 @@ class Atestat extends Model implements HasMedia
 
     public function serie()
     {
-        return $this->belongsTo(Region::class, 'serie_id');
+        return $this->belongsTo(Region::class, 'serie_id')->select(['id', 'mnemonic']);
     }
 
     public function region()
     {
-        return $this->belongsTo(Region::class, 'region_id');
+        return $this->belongsTo(Region::class, 'region_id')->select(['id', 'denj', 'mnemonic']);
     }
 
     public function place()
     {
-        return $this->belongsTo(Place::class, 'place_id');
+        return $this->belongsTo(Place::class, 'place_id')->select(['id', 'denloc', 'region_id']);
     }
 
     public function getImageAttribute()
@@ -80,6 +80,18 @@ class Atestat extends Model implements HasMedia
 
     public function created_by()
     {
-        return $this->belongsTo(User::class, 'created_by_id');
+        return $this->belongsTo(User::class, 'created_by_id')->select(['id', 'name', 'phone', 'email']);
+    }
+
+    public function products()
+    {
+        return $this->hasManyThrough(
+            Product::class,
+            User::class,
+            'id', // Foreign key on Users table...
+            'created_by_id', // Foreign key on Products table...
+            'created_by_id', // Local key on Atestats table...
+            'id' // Local key on Users table...
+        )->with(['category', 'subcategory','region', 'place']);
     }
 }
