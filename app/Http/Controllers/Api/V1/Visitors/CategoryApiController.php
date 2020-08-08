@@ -3,10 +3,10 @@
 namespace App\Http\Controllers\Api\V1\Visitors;
 
 use App\Http\Controllers\Controller;
-use App\Http\Requests\StoreCategoryRequest;
-use App\Http\Requests\UpdateCategoryRequest;
+use App\Http\Resources\Visitors\ProductResource;
 use App\Http\Resources\Visitors\CategoryResource;
 use App\Models\Category;
+use App\Models\Product;
 use Gate;
 use Illuminate\Http\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -15,11 +15,13 @@ class CategoryApiController extends Controller
 {
     public function index()
     {
-        return new CategoryResource(Category::with(['subcategories'])->get());
+        $categories = Category::withFilters()->get();
+        return CategoryResource::collection($categories->load(['subcategories']));
     }
 
-    public function show(Category $category)
+    public function show($category)
     {
-        return new CategoryResource($category->load(['added_by', 'approved_by']));
+        $categories = Category::withFilters()->findOrFail($category);
+        return new CategoryResource($categories);
     }
 }

@@ -14,8 +14,6 @@ class CreateRegionsTable extends Migration
             $table->integer('fsj');
             $table->string('mnemonic');
             $table->integer('zona');
-            $table->timestamps();
-            $table->softDeletes();
         });
     }
 }

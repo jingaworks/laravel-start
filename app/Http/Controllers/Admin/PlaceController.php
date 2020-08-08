@@ -17,7 +17,7 @@ class PlaceController extends Controller
     {
         abort_if(Gate::denies('place_access'), Response::HTTP_FORBIDDEN, '403 Forbidden');
 
-        $places = Place::all();
+        $places = Place::where('niv', 3)->orderBy('denloc')->get();
 
         return view('admin.places.index', compact('places'));
     }

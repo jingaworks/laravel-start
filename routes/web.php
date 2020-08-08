@@ -1,5 +1,7 @@
 <?php
 
+Route::get('/test', 'admin\ProfileController@index');
+
 Route::redirect('/', '/login');
 Route::get('/home', function () {
     if (session('status')) {
@@ -27,11 +29,11 @@ Route::group(['prefix' => 'admin', 'as' => 'admin.', 'namespace' => 'Admin', 'mi
     Route::delete('users/destroy', 'UsersController@massDestroy')->name('users.massDestroy');
     Route::resource('users', 'UsersController');
 
-    // Atestats
-    Route::delete('atestats/destroy', 'AtestatController@massDestroy')->name('atestats.massDestroy');
-    Route::post('atestats/media', 'AtestatController@storeMedia')->name('atestats.storeMedia');
-    Route::post('atestats/ckmedia', 'AtestatController@storeCKEditorImages')->name('atestats.storeCKEditorImages');
-    Route::resource('atestats', 'AtestatController');
+    // Profiles
+    Route::delete('profiles/destroy', 'ProfileController@massDestroy')->name('profiles.massDestroy');
+    Route::post('profiles/media', 'ProfileController@storeMedia')->name('profiles.storeMedia');
+    Route::post('profiles/ckmedia', 'ProfileController@storeCKEditorImages')->name('profiles.storeCKEditorImages');
+    Route::resource('profiles', 'ProfileController');
 
     // Regions
     Route::delete('regions/destroy', 'RegionController@massDestroy')->name('regions.massDestroy');

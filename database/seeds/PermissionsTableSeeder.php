@@ -74,23 +74,23 @@ class PermissionsTableSeeder extends Seeder
             ],
             [
                 'id'    => 17,
-                'title' => 'atestat_create',
+                'title' => 'profile_create',
             ],
             [
                 'id'    => 18,
-                'title' => 'atestat_edit',
+                'title' => 'profile_edit',
             ],
             [
                 'id'    => 19,
-                'title' => 'atestat_show',
+                'title' => 'profile_show',
             ],
             [
                 'id'    => 20,
-                'title' => 'atestat_delete',
+                'title' => 'profile_delete',
             ],
             [
                 'id'    => 21,
-                'title' => 'atestat_access',
+                'title' => 'profile_access',
             ],
             [
                 'id'    => 22,

@@ -15,7 +15,7 @@ class SubcategoryApiController extends Controller
 {
     public function index()
     {
-        return new SubcategoryResource(Subcategory::with(['category', 'products'])->withCount(['products'])->get());
+        return SubcategoryResource::collection(Subcategory::with(['category', 'products'])->withCount(['products'])->get());
     }
 
     public function show($subcategory)

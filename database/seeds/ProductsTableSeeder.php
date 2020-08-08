@@ -1,7 +1,7 @@
 <?php
 
 use App\Models\User;
-use App\Models\Atestat;
+use App\Models\Profile;
 use App\Models\Subcategory;
 use App\Models\Product;
 use Illuminate\Database\Seeder;
@@ -17,9 +17,9 @@ class ProductsTableSeeder extends Seeder
     public function run()
     {
         $user = User::findOrFail(2);
-        $user->atestate()->create([
+        $user->profile()->create([
             'name' => $user->name,
-            'address' => 'adresa producator atestat',
+            'address' => 'adresa producator Profile',
             'serie_id' => 13,
             'number'=> '1234567',
             'valid_year'=> '2020',
@@ -39,8 +39,8 @@ class ProductsTableSeeder extends Seeder
                 'subcategory_id' => $subcategory->id,
                 'price_starts' => rand(3, 8),
                 'price_ends' => rand(8, 15),
-                'region_id' => $user->atestate->first()->region_id,
-                'place_id' => $user->atestate->first()->place_id,
+                'region_id' => $user->profile->first()->region_id,
+                'place_id' => $user->profile->first()->place_id,
                 'created_by_id' => $user->id,
             ]);
         }

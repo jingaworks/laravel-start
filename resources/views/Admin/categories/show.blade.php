@@ -79,7 +79,7 @@
     </ul>
     <div class="tab-content">
         <div class="tab-pane" role="tabpanel" id="category_products">
-            @includeIf('admin.categories.relationships.categoryProducts', ['products' => $category->categoryProducts])
+            @includeIf('admin.categories.relationships.products', ['products' => $category->products])
         </div>
     </div>
 </div>

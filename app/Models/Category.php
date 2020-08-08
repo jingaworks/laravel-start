@@ -27,6 +27,19 @@ class Category extends Model
         'deleted_at',
     ];
 
+    public function scopeWithFilters($query)
+    {
+        return $query->when(request()->input('region'), function ($query) {
+            $query->with(['products' => function ($query) {
+                $query->where('region_id', request()->input('region'));
+            }]);
+        })
+        ->when(request()->input('place'), function ($query) {
+            $query->with(['products' => function ($query) {
+                $query->where('place_id', request()->input('place'));
+            }]);
+        });
+    } 
     protected function serializeDate(DateTimeInterface $date)
     {
         return $date->format('Y-m-d H:i:s');
@@ -38,7 +51,7 @@ class Category extends Model
         $this->attributes['slug'] = Str::slug($value);
     }
 
-    public function categoryProducts()
+    public function products()
     {
         return $this->hasMany(Product::class, 'category_id', 'id');
     }

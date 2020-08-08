@@ -61,7 +61,7 @@ class SubcategoryController extends Controller
     {
         abort_if(Gate::denies('subcategory_show'), Response::HTTP_FORBIDDEN, '403 Forbidden');
 
-        $subcategory->load('category', 'added_by', 'approved_by', 'subcategoryProducts');
+        $subcategory->load('category', 'added_by', 'approved_by', 'products');
 
         return view('admin.subcategories.show', compact('subcategory'));
     }

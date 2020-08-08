@@ -30,34 +30,7 @@
                             {{ trans('cruds.place.fields.tip') }}
                         </th>
                         <th>
-                            {{ trans('cruds.place.fields.zona') }}
-                        </th>
-                        <th>
                             {{ trans('cruds.place.fields.niv') }}
-                        </th>
-                        <th>
-                            {{ trans('cruds.place.fields.med') }}
-                        </th>
-                        <th>
-                            {{ trans('cruds.place.fields.regiune') }}
-                        </th>
-                        <th>
-                            {{ trans('cruds.place.fields.fsj') }}
-                        </th>
-                        <th>
-                            {{ trans('cruds.place.fields.fs_2') }}
-                        </th>
-                        <th>
-                            {{ trans('cruds.place.fields.fs_3') }}
-                        </th>
-                        <th>
-                            {{ trans('cruds.place.fields.fsl') }}
-                        </th>
-                        <th>
-                            {{ trans('cruds.place.fields.rang') }}
-                        </th>
-                        <th>
-                            {{ trans('cruds.place.fields.fictiv') }}
                         </th>
                         <th>
                             {{ trans('cruds.place.fields.region') }}
@@ -89,34 +62,7 @@
                                 {{ $place->tip ?? '' }}
                             </td>
                             <td>
-                                {{ $place->zona ?? '' }}
-                            </td>
-                            <td>
                                 {{ $place->niv ?? '' }}
-                            </td>
-                            <td>
-                                {{ $place->med ?? '' }}
-                            </td>
-                            <td>
-                                {{ $place->regiune ?? '' }}
-                            </td>
-                            <td>
-                                {{ $place->fsj ?? '' }}
-                            </td>
-                            <td>
-                                {{ $place->fs_2 ?? '' }}
-                            </td>
-                            <td>
-                                {{ $place->fs_3 ?? '' }}
-                            </td>
-                            <td>
-                                {{ $place->fsl ?? '' }}
-                            </td>
-                            <td>
-                                {{ $place->rang ?? '' }}
-                            </td>
-                            <td>
-                                {{ $place->fictiv ?? '' }}
                             </td>
                             <td>
                                 {{ $place->region->denj ?? '' }}

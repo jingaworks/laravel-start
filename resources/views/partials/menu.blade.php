@@ -57,13 +57,13 @@
                 </ul>
             </li>
         @endcan
-        @can('atestat_access')
+        @can('profile_access')
             <li class="c-sidebar-nav-item">
-                <a href="{{ route("admin.atestats.index") }}" class="c-sidebar-nav-link {{ request()->is('admin/atestats') || request()->is('admin/atestats/*') ? 'active' : '' }}">
+                <a href="{{ route("admin.profiles.index") }}" class="c-sidebar-nav-link {{ request()->is('admin/profiles') || request()->is('admin/profiles/*') ? 'active' : '' }}">
                     <i class="fa-fw fas fa-id-card c-sidebar-nav-icon">
 
                     </i>
-                    {{ trans('cruds.atestat.title') }}
+                    {{ trans('cruds.profile.title') }}
                 </a>
             </li>
         @endcan

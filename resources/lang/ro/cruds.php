@@ -73,9 +73,9 @@ return [
             'verification_token_helper' => '',
         ],
     ],
-    'atestat'        => [
-        'title'          => 'Atestat',
-        'title_singular' => 'Atestat',
+    'profile'        => [
+        'title'          => 'Profile',
+        'title_singular' => 'Profile',
         'fields'         => [
             'id'                => 'ID',
             'id_helper'         => '',

@@ -24,8 +24,6 @@ class CreatePlacesTable extends Migration
             $table->integer('fsl')->nullable();
             $table->string('rang')->nullable();
             $table->string('fictiv')->nullable();
-            $table->timestamps();
-            $table->softDeletes();
         });
     }
 }

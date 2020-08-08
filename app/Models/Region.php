@@ -2,30 +2,22 @@
 
 namespace App\Models;
 
+use App\Models\Place;
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Database\Eloquent\SoftDeletes;
 use \DateTimeInterface;
 
 class Region extends Model
 {
-    use SoftDeletes;
-
     public $table = 'regions';
+    public $timestamps = false;
 
-    protected $dates = [
-        'created_at',
-        'updated_at',
-        'deleted_at',
-    ];
+    protected $dates = [];
 
     protected $fillable = [
         'denj',
         'fsj',
         'mnemonic',
         'zona',
-        'created_at',
-        'updated_at',
-        'deleted_at',
     ];
 
     protected function serializeDate(DateTimeInterface $date)
@@ -33,8 +25,13 @@ class Region extends Model
         return $date->format('Y-m-d H:i:s');
     }
 
-    public function regionProducts()
+    public function products()
     {
         return $this->hasMany(Product::class, 'region_id', 'id');
+    }
+
+    public function places()
+    {
+        return $this->hasMany(Place::class, 'region_id', 'id');
     }
 }

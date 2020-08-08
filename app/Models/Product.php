@@ -43,6 +43,22 @@ class Product extends Model implements HasMedia
         'deleted_at',
     ];
 
+    public function scopeWithFilters($query)
+    {
+        return $query->when(request()->input('region'), function ($query) {
+            $query->where('region_id', request()->input('region'));
+        })
+        ->when(request()->input('place'), function ($query) {
+            $query->where('place_id', request()->input('place'));
+        })
+        ->when(request()->input('category'), function ($query) {
+            $query->where('category_id', request()->input('category'));
+        })
+        ->when(request()->input('subcategory'), function ($query) {
+            $query->where('subcategory_id', request()->input('subcategory'));
+        });
+    }
+
     protected function serializeDate(DateTimeInterface $date)
     {
         return $date->format('Y-m-d H:i:s');
@@ -58,23 +74,9 @@ class Product extends Model implements HasMedia
     {
         $files = $this->getMedia('images');
         $files->each(function ($item) {
-            unset($item->mime_type);
-            unset($item->collection_name);
-            unset($item->created_at);
-            unset($item->updated_at);
-            unset($item->manipulations);
-            unset($item->order_column);
-            unset($item->custom_properties);
-            unset($item->size);
-            unset($item->model_id);
-            unset($item->responsive_images);
             $item->url       = $item->getUrl();
             $item->thumbnail = $item->getUrl('thumb');
             $item->preview   = $item->getUrl('preview');
-            unset($item->name);
-            // unset($item->file_name);
-            // unset($item->disk);
-            // unset($item->model_type);
         });
 
         return $files;
@@ -87,38 +89,38 @@ class Product extends Model implements HasMedia
 
     public function category()
     {
-        return $this->belongsTo(Category::class, 'category_id')->select(['id', 'name']);
+        return $this->belongsTo(Category::class, 'category_id');
     }
 
     public function subcategory()
     {
-        return $this->belongsTo(Subcategory::class, 'subcategory_id')->select(['id', 'name']);
+        return $this->belongsTo(Subcategory::class, 'subcategory_id');
     }
 
     public function region()
     {
-        return $this->belongsTo(Region::class, 'region_id')->select(['id', 'denj', 'mnemonic']);
+        return $this->belongsTo(Region::class, 'region_id');
     }
 
     public function place()
     {
-        return $this->belongsTo(Place::class, 'place_id')->select(['id', 'denloc', 'region_id']);
+        return $this->belongsTo(Place::class, 'place_id');
     }
 
     public function created_by()
     {
-        return $this->belongsTo(User::class, 'created_by_id')->select(['id', 'name', 'phone', 'email']);
+        return $this->belongsTo(User::class, 'created_by_id');
     }
 
-    public function atestat()
+    public function profile()
     {
         return $this->hasManyThrough(
-            Atestat::class,
+            Profile::class,
             User::class,
             'id', // Foreign key on Users table...
-            'created_by_id', // Foreign key on Atestat table...
-            'created_by_id', // Local key on Atestats table...
+            'created_by_id', // Foreign key on Profile table...
+            'created_by_id', // Local key on Profiles table...
             'id' // Local key on Users table...
-        )->with(['serie', 'region', 'place']);
+        )->take(1)->with(['region', 'place']);
     }
 }

@@ -16,11 +16,11 @@ class ProductApiController extends Controller
 
     public function index()
     {
-        return new ProductResource(Product::with(['atestat', 'category', 'subcategory', 'region', 'place', 'created_by'])->get());
+        return ProductResource::collection(Product::withFilters()->orderBy('price_starts')->with(['profile', 'category', 'subcategory', 'region', 'place', 'created_by'])->paginate(10));
     }
 
     public function show($product)
     {
-        return new ProductResource(Product::with(['atestat', 'category', 'subcategory', 'region', 'place', 'created_by'])->find($product));
+        return new ProductResource(Product::with(['profile', 'category', 'subcategory', 'region', 'place', 'created_by'])->find($product));
     }
 }

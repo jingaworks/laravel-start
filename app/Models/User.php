@@ -125,8 +125,8 @@ class User extends Authenticatable
     {
         return $this->belongsToMany(Role::class);
     }
-    public function atestate()
+    public function profile()
     {
-        return $this->hasMany(Atestat::class, 'created_by_id', 'id');
+        return $this->hasMany(Profile::class, 'created_by_id', 'id');
     }
 }
