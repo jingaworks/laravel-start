@@ -62,62 +62,6 @@
                 <span class="help-block">{{ trans('cruds.product.fields.images_helper') }}</span>
             </div>
             <div class="form-group">
-                <label for="category_id">{{ trans('cruds.product.fields.category') }}</label>
-                <select class="form-control select2 {{ $errors->has('category') ? 'is-invalid' : '' }}" name="category_id" id="category_id">
-                    @foreach($categories as $id => $category)
-                        <option value="{{ $id }}" {{ ($product->category ? $product->category->id : old('category_id')) == $id ? 'selected' : '' }}>{{ $category }}</option>
-                    @endforeach
-                </select>
-                @if($errors->has('category'))
-                    <div class="invalid-feedback">
-                        {{ $errors->first('category') }}
-                    </div>
-                @endif
-                <span class="help-block">{{ trans('cruds.product.fields.category_helper') }}</span>
-            </div>
-            <div class="form-group">
-                <label for="subcategory_id">{{ trans('cruds.product.fields.subcategory') }}</label>
-                <select class="form-control select2 {{ $errors->has('subcategory') ? 'is-invalid' : '' }}" name="subcategory_id" id="subcategory_id">
-                    @foreach($subcategories as $id => $subcategory)
-                        <option value="{{ $id }}" {{ ($product->subcategory ? $product->subcategory->id : old('subcategory_id')) == $id ? 'selected' : '' }}>{{ $subcategory }}</option>
-                    @endforeach
-                </select>
-                @if($errors->has('subcategory'))
-                    <div class="invalid-feedback">
-                        {{ $errors->first('subcategory') }}
-                    </div>
-                @endif
-                <span class="help-block">{{ trans('cruds.product.fields.subcategory_helper') }}</span>
-            </div>
-            <div class="form-group">
-                <label for="region_id">{{ trans('cruds.product.fields.region') }}</label>
-                <select class="form-control select2 {{ $errors->has('region') ? 'is-invalid' : '' }}" name="region_id" id="region_id">
-                    @foreach($regions as $id => $region)
-                        <option value="{{ $id }}" {{ ($product->region ? $product->region->id : old('region_id')) == $id ? 'selected' : '' }}>{{ $region }}</option>
-                    @endforeach
-                </select>
-                @if($errors->has('region'))
-                    <div class="invalid-feedback">
-                        {{ $errors->first('region') }}
-                    </div>
-                @endif
-                <span class="help-block">{{ trans('cruds.product.fields.region_helper') }}</span>
-            </div>
-            <div class="form-group">
-                <label for="place_id">{{ trans('cruds.product.fields.place') }}</label>
-                <select class="form-control select2 {{ $errors->has('place') ? 'is-invalid' : '' }}" name="place_id" id="place_id">
-                    @foreach($places as $id => $place)
-                        <option value="{{ $id }}" {{ ($product->place ? $product->place->id : old('place_id')) == $id ? 'selected' : '' }}>{{ $place }}</option>
-                    @endforeach
-                </select>
-                @if($errors->has('place'))
-                    <div class="invalid-feedback">
-                        {{ $errors->first('place') }}
-                    </div>
-                @endif
-                <span class="help-block">{{ trans('cruds.product.fields.place_helper') }}</span>
-            </div>
-            <div class="form-group">
                 <button class="btn btn-danger" type="submit">
                     {{ trans('global.save') }}
                 </button>

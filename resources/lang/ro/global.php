@@ -1,6 +1,8 @@
 <?php
 
 return [
+    'selectCategory'                       => 'Selecteaza o Categorie',
+    'selectCategoryFirst'                  => 'Te rog selecteaza Categoria intai',
     'actions'                              => 'Acțiuni',
     'add'                                  => 'Adăugă',
     'allRightsReserved'                    => 'Toate drepturile rezervate.',

@@ -49,6 +49,7 @@ Route::group(['prefix' => 'admin', 'as' => 'admin.', 'namespace' => 'Admin', 'mi
 
     // Subcategories
     Route::delete('subcategories/destroy', 'SubcategoryController@massDestroy')->name('subcategories.massDestroy');
+    Route::get('subcategories/getJson', 'SubcategoryController@getJsonSubcategory')->name('products.getJsonSubcategory');
     Route::resource('subcategories', 'SubcategoryController');
 
     // Products

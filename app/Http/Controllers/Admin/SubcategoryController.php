@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\GetJsonSubcategoryRequest;
 use App\Http\Requests\MassDestroySubcategoryRequest;
 use App\Http\Requests\StoreSubcategoryRequest;
 use App\Http\Requests\UpdateSubcategoryRequest;
@@ -80,5 +81,15 @@ class SubcategoryController extends Controller
         Subcategory::whereIn('id', request('ids'))->delete();
 
         return response(null, Response::HTTP_NO_CONTENT);
+    }
+    
+
+    public function getJsonSubcategory(GetJsonSubcategoryRequest $request)
+    {
+        abort_if(Gate::denies('product_create'), Response::HTTP_FORBIDDEN, '403 Forbidden');
+
+        $subcategories = Subcategory::where('category_id', $request->category_id)->pluck('name', 'id')->prepend(trans('global.pleaseSelect'), '');
+
+        return [$subcategories];
     }
 }

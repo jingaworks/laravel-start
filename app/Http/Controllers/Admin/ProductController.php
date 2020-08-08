@@ -34,19 +34,16 @@ class ProductController extends Controller
     {
         abort_if(Gate::denies('product_create'), Response::HTTP_FORBIDDEN, '403 Forbidden');
 
-        $categories = Category::all()->pluck('name', 'id')->prepend(trans('global.pleaseSelect'), '');
+        $categories = Category::all()->pluck('name', 'id')->prepend(trans('global.selectCategory'), '');
 
-        $subcategories = Subcategory::all()->pluck('name', 'id')->prepend(trans('global.pleaseSelect'), '');
-
-        $regions = Region::all()->pluck('denj', 'id')->prepend(trans('global.pleaseSelect'), '');
-
-        $places = Place::all()->pluck('denloc', 'id')->prepend(trans('global.pleaseSelect'), '');
-
-        return view('admin.products.create', compact('categories', 'subcategories', 'regions', 'places'));
+        return view('admin.products.create', compact('categories'));
     }
 
     public function store(StoreProductRequest $request)
     {
+        $profile = auth()->user()->profile()->first();
+        $request['region_id'] = $profile->region_id;
+        $request['place_id'] = $profile->place_id;
         $product = Product::create($request->all());
 
         foreach ($request->input('images', []) as $file) {
@@ -64,17 +61,7 @@ class ProductController extends Controller
     {
         abort_if(Gate::denies('product_edit'), Response::HTTP_FORBIDDEN, '403 Forbidden');
 
-        $categories = Category::all()->pluck('name', 'id')->prepend(trans('global.pleaseSelect'), '');
-
-        $subcategories = Subcategory::all()->pluck('name', 'id')->prepend(trans('global.pleaseSelect'), '');
-
-        $regions = Region::all()->pluck('denj', 'id')->prepend(trans('global.pleaseSelect'), '');
-
-        $places = Place::all()->pluck('denloc', 'id')->prepend(trans('global.pleaseSelect'), '');
-
-        $product->load('category', 'subcategory', 'region', 'place', 'created_by');
-
-        return view('admin.products.edit', compact('categories', 'subcategories', 'regions', 'places', 'product'));
+        return view('admin.products.edit', compact('product'));
     }
 
     public function update(UpdateProductRequest $request, Product $product)
